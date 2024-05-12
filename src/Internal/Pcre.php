@@ -3,7 +3,7 @@ namespace Regex\Internal;
 
 use Regex\BacktrackException;
 use Regex\JitException;
-use Regex\PcreException;
+use Regex\ExecutionException;
 use Regex\RecursionException;
 use Regex\RegexException;
 use Regex\UnicodeException;
@@ -41,7 +41,7 @@ class Pcre
             \PREG_OFFSET_CAPTURE);
         \restore_error_handler();
         if ($error) {
-            throw new PcreException('undetermined error');
+            throw new ExecutionException('undetermined error');
         }
         $this->throwMatchException();
         return $match;
@@ -57,7 +57,7 @@ class Pcre
             \PREG_UNMATCHED_AS_NULL);
         \restore_error_handler();
         if ($error) {
-            throw new PcreException('undetermined error');
+            throw new ExecutionException('undetermined error');
         }
         $this->throwMatchException();
         return $matches;
@@ -73,7 +73,7 @@ class Pcre
             \PREG_OFFSET_CAPTURE | \PREG_SET_ORDER);
         \restore_error_handler();
         if ($error) {
-            return [$matches, new PcreException('undetermined error')];
+            return [$matches, new ExecutionException('undetermined error')];
         }
         return [$matches, $this->lastMatchException()];
     }
@@ -132,7 +132,7 @@ class Pcre
     {
         $error = \preg_last_error();
         if ($error === \PREG_INTERNAL_ERROR) {
-            return new PcreException('pcre internal error');
+            return new ExecutionException('pcre internal error');
         }
         if ($error === \PREG_BACKTRACK_LIMIT_ERROR) {
             return new BacktrackException();
