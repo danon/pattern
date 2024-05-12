@@ -3,7 +3,7 @@ namespace Test\Unit\_system;
 
 use PHPUnit\Framework\TestCase;
 use Regex\Pattern;
-use Regex\PcreException;
+use Regex\ExecutionException;
 use function Test\Fixture\Functions\catching;
 use function Test\Fixture\Functions\systemErrorHandler;
 
@@ -26,7 +26,7 @@ class _errorHandler extends TestCase
     {
         systemErrorHandler(function (): void {
             catching(fn() => $this->pattern->first('word'))
-                ->assertException(PcreException::class);
+                ->assertException(ExecutionException::class);
         });
     }
 
@@ -37,7 +37,7 @@ class _errorHandler extends TestCase
     {
         systemErrorHandler(function (): void {
             catching(fn() => $this->pattern->search('word'))
-                ->assertException(PcreException::class);
+                ->assertException(ExecutionException::class);
         });
     }
 
@@ -48,7 +48,7 @@ class _errorHandler extends TestCase
     {
         systemErrorHandler(function (): void {
             catching(fn() => $this->pattern->match('word'))
-                ->assertException(PcreException::class);
+                ->assertException(ExecutionException::class);
         });
     }
 }

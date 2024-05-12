@@ -1,7 +1,7 @@
 <?php
 namespace Regex\Internal;
 
-use Regex\ExecutionException;
+use Regex\PcreException;
 use Regex\RegexException;
 use Regex\SyntaxException;
 use Regex\UnicodeException;
@@ -68,9 +68,9 @@ class ExceptionFactory
         return \strPos($this->input, "\0");
     }
 
-    private function executionException(string $message): ExecutionException
+    private function executionException(string $message): PcreException
     {
-        return new ExecutionException($this->firstSentence($message));
+        return new PcreException($this->firstSentence($message));
     }
 
     private function firstSentence(string $message): string

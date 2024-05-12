@@ -3,7 +3,7 @@ namespace Test\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Regex\BacktrackException;
-use Regex\ExecutionException;
+use Regex\PcreException;
 use Regex\PregPattern;
 use Regex\SyntaxException;
 use function Test\Fixture\Functions\catching;
@@ -17,7 +17,7 @@ class preg extends TestCase
     public function empty()
     {
         catching(fn() => new PregPattern(''))
-            ->assertException(ExecutionException::class)
+            ->assertException(PcreException::class)
             ->assertMessage('Empty regular expression.');
     }
 
@@ -83,7 +83,7 @@ class preg extends TestCase
     {
         $this->markAsRisky();
         catching(fn() => new PregPattern('/pattern'))
-            ->assertException(ExecutionException::class)
+            ->assertException(PcreException::class)
             ->assertMessage("No ending delimiter '/' found.");
     }
 
@@ -117,7 +117,7 @@ class preg extends TestCase
             $call->assertExceptionNone();
         } else {
             $call
-                ->assertException(ExecutionException::class)
+                ->assertException(PcreException::class)
                 ->assertMessage("Unknown modifier 'n'.");
         }
     }

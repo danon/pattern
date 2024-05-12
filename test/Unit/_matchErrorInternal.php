@@ -3,7 +3,7 @@ namespace Test\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Regex\Pattern;
-use Regex\PcreException;
+use Regex\ExecutionException;
 use function Test\Fixture\Functions\catching;
 
 class _matchErrorInternal extends TestCase
@@ -82,7 +82,7 @@ class _matchErrorInternal extends TestCase
     private function assertInternalError(callable $block): void
     {
         catching($block)
-            ->assertException(PcreException::class)
+            ->assertException(ExecutionException::class)
             ->assertMessage('Failed to match the subject, due to pcre internal error.');
     }
 
@@ -121,7 +121,7 @@ class _matchErrorInternal extends TestCase
     private function assertUndeterminedError(callable $block): void
     {
         catching($block)
-            ->assertException(PcreException::class)
+            ->assertException(ExecutionException::class)
             ->assertMessage('Failed to match the subject, due to undetermined error.');
     }
 
