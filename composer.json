@@ -1,4 +1,6 @@
 {
+  "type": "library",
+  "name": "danon/pattern",
   "autoload": {
     "psr-4": {
       "Regex\\": "src/"
@@ -20,5 +22,9 @@
   "require-dev": {
     "phpunit/phpunit": "^9.6.12",
     "rawr/phpunit-data-provider": "^3.1.0"
+  },
+  "dist": {
+    "url": "https://github.com/t-regx/T-Regx/releases/download/1.0.0-alpha1/T-Regx-1.0.0-alpha1.zip",
+    "type": "zip"
   }
 }
